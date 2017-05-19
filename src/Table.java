@@ -5,7 +5,7 @@ public class Table {
 	Table(){
 	}
 	
-	public void setTable(String input){
+	public void setTable(String input, int where){
 		
 	}
 	

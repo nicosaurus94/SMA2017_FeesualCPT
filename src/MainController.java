@@ -2,7 +2,7 @@
 public class MainController {
 	MainController(){
 	}
-	Table tableObj;
+	Table tableObj = new Table();
 	TestCaseController tcController = new TestCaseController();
 	FeedbackController fbController = new FeedbackController();
 //	TestCase[] tcListContainer = new TestCase[size];	 
@@ -23,8 +23,8 @@ public class MainController {
 		
 	}
 	
-	public void setInput(String input){
-		
+	public void setInput(String input, int where){	//매개변수 필요함.
+		tableObj.setTable(input,where);
 	}
 	
 	public void analyzeCall(){
