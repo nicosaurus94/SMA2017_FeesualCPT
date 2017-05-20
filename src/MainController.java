@@ -29,7 +29,7 @@ public class MainController {
 	}
 	
 	public void analyzeCall(){
-		
+		this.fbController.getFeedback(tableObj);
 	}
 	
 	public void displayFeedback(){
