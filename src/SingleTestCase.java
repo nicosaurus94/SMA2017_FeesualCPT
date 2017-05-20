@@ -1,13 +1,17 @@
 
 public class SingleTestCase {
-	public int reNum;
-	public String desc;
+	private int reNum;
+	private String desc;
 	SingleTestCase(){
 		
 	}
+	SingleTestCase(int ref, String desc){
+		this.reNum = ref;
+		this.desc = desc;
+	}
 	
 	public int getReNum(){
-		return reNum;
+		return this.reNum;
 	}
 	
 	public void setReNum(int reNum){
@@ -15,7 +19,7 @@ public class SingleTestCase {
 	}
 	
 	public String getDesc(){
-		return desc;
+		return this.desc;
 	}
 	
 	public void setDesc(String desc){

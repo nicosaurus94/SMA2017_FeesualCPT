@@ -5,7 +5,8 @@ public class MainController {
 	Table tableObj = new Table();
 	TestCaseController tcController = new TestCaseController();
 	FeedbackController fbController = new FeedbackController();
-//	TestCase[] tcListContainer = new TestCase[size];	 
+	TextFileController tfController = new TextFileController();
+	TestCase tcListContainer = new TestCase();	 
 //	Feedback[] feedContainer = new Feedback[size];
 	private int index1;
 	private int index2;
@@ -23,8 +24,8 @@ public class MainController {
 		
 	}
 	
-	public void setInput(String input, int where){	//매개변수 필요함.
-		tableObj.setTable(input,where);
+	public void setInput(String input, int y, int x){	//매개변수 필요함.
+		tableObj.setTable(input, y, x);
 	}
 	
 	public void analyzeCall(){
@@ -40,10 +41,14 @@ public class MainController {
 	}
 	
 	public void saveCall(){
-		
+		tfController.saveRequest(this.tableObj, this.tcListContainer);
 	}
 	
 	public void displayDesc(){
+		
+	}
+	
+	public void feedbackCall(){
 		
 	}
 }

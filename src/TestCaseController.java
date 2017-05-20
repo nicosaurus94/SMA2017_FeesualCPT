@@ -1,6 +1,7 @@
+import java.util.ArrayList;
 
 public class TestCaseController {
-//	private TestCase[] tcList = new TestCase[size];
+	private ArrayList<TestCase> tcList = new ArrayList<TestCase>();
 	TestCaseController(){		
 	}
 	
@@ -12,8 +13,7 @@ public class TestCaseController {
 		
 	}
 	
-	public TestCase getTestCaseList(){
-		TestCase tc = new TestCase();
-		return tc;
+	public ArrayList<TestCase> getTestCaseList(){
+		return tcList;
 	}
 }
