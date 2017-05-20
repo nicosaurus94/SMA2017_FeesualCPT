@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class MainController {
 	MainController(){
@@ -6,14 +7,13 @@ public class MainController {
 	TestCaseController tcController = new TestCaseController();
 	FeedbackController fbController = new FeedbackController();
 	TextFileController tfController = new TextFileController();
-	TestCase tcListContainer = new TestCase();	 
+	ArrayList<TestCase> tcListContainer;	 
 //	Feedback[] feedContainer = new Feedback[size];
 	private int index1;
 	private int index2;
 	
 	public TestCase getTcList(int index){ 
-		TestCase Tc = new TestCase();
-		return Tc;
+		return tcListContainer.get(index);
 	}
 
 	public void getPrevDesc(){

@@ -1,11 +1,12 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class TextFileController {
 	private File file;
 	TextFileController(){
 	}
 	
-	public void saveRequest(Table table, TestCase tcList){
+	public void saveRequest(Table table, ArrayList<TestCase> tcList){
 		String fileName = "test.txt";
 		
 		try{
