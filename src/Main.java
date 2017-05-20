@@ -1,13 +1,18 @@
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 public class Main extends JFrame {
-
 
 	private javax.swing.JButton showPrev;
 	private javax.swing.JButton showNext;
 	private javax.swing.JButton analyzeButton;
 	private javax.swing.JButton saveButton;
+	private javax.swing.JButton deleteRowButton;
+	private static javax.swing.JButton addRowButton;
 	private javax.swing.JCheckBox ifCheckBox;
 	private javax.swing.JCheckBox singleCheckBox;
 	private javax.swing.JCheckBox errorCheckBox;
@@ -21,22 +26,22 @@ public class Main extends JFrame {
 	private javax.swing.JPanel tcListContainer;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane tcJListContainer;
-	private javax.swing.JTable table;
-	
-	Main(){
+	private static javax.swing.JTable table;
+
+	Main() {
 		initComponents();
 	}
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		//Start GUI
+
+		// Start GUI
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new Main().setVisible(true);
 			}
 		});
-		
+
 		MainController mc = new MainController();
 		mc.setInput("ref 1", 0, 0);
 		mc.setInput("Category 1", 0, 1);
@@ -57,10 +62,14 @@ public class Main extends JFrame {
 		mc.setInput("SBD", 2, 3);
 		mc.setInput(" ", -1, 0);
 		mc.setInput(" ", -3, 0);
+		mc.tcController.analyzeTestCase(mc.tableObj);
 		mc.saveCall();
+		mc.displayTcList();
+		mc.displayDesc();
+		mc.feedbackCall();
 		System.out.println("end");
 	}
-	
+
 	private void initComponents() {
 		// TODO Auto-generated method stub
 
@@ -82,6 +91,8 @@ public class Main extends JFrame {
 		tcListTitle = new javax.swing.JLabel();
 		tcJListContainer = new javax.swing.JScrollPane();
 		tcJList = new javax.swing.JList<>();
+		deleteRowButton = new javax.swing.JButton();
+		addRowButton = new javax.swing.JButton();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setName("mainContainer"); // NOI18N
@@ -90,11 +101,20 @@ public class Main extends JFrame {
 
 		table.setBorder(javax.swing.BorderFactory
 				.createLineBorder(new java.awt.Color(0, 0, 0)));
-		table.setModel(new javax.swing.table.DefaultTableModel(
-				new Object[][] { { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null } }, new String[] { "Title 1",
-						"Title 2", "Title 3", "Title 4" }));
+		table.setGridColor(Color.black);
+		table.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+				{ null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null },
+				{ null, null, null, null, null, null, null, null } },
+				new String[] { "Title 1", "Title 2", "Title 3", "Title 4",
+						"Title 5", "Title 6", "Title 7", "Title 8" }));
 		table.setName("table"); // NOI18N
 		jScrollPane1.setViewportView(table);
 
@@ -134,7 +154,8 @@ public class Main extends JFrame {
 		showNext.setName("showNext"); // NOI18N
 
 		tcDescriptionTitle.setBackground(new java.awt.Color(255, 255, 255));
-		tcDescriptionTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		tcDescriptionTitle
+				.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		tcDescriptionTitle.setText("Selected Step Description");
 		tcDescriptionTitle.setName("tcDescriptionTitle"); // NOI18N
 
@@ -277,6 +298,12 @@ public class Main extends JFrame {
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(tcJListContainer)));
 
+		deleteRowButton.setText("-");
+		deleteRowButton.setName("deleteRowButton"); // NOI18N
+
+		addRowButton.setText("+");
+		addRowButton.setName("addRowButton"); // NOI18N
+
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(
 				bottomHalf);
 		bottomHalf.setLayout(jPanel2Layout);
@@ -311,6 +338,32 @@ public class Main extends JFrame {
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
+														.addComponent(
+																saveButton,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addGroup(
+																jPanel2Layout
+																		.createSequentialGroup()
+																		.addComponent(
+																				ifCheckBox)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				58,
+																				Short.MAX_VALUE)
+																		.addComponent(
+																				addRowButton,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				45,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				deleteRowButton,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				43,
+																				javax.swing.GroupLayout.PREFERRED_SIZE))
 														.addGroup(
 																jPanel2Layout
 																		.createSequentialGroup()
@@ -319,19 +372,12 @@ public class Main extends JFrame {
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.LEADING)
 																						.addComponent(
-																								ifCheckBox)
-																						.addComponent(
 																								singleCheckBox)
 																						.addComponent(
 																								errorCheckBox))
 																		.addGap(0,
-																				78,
-																				Short.MAX_VALUE))
-														.addComponent(
-																saveButton,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE))
+																				0,
+																				Short.MAX_VALUE)))
 										.addContainerGap()));
 		jPanel2Layout
 				.setVerticalGroup(jPanel2Layout
@@ -340,45 +386,68 @@ public class Main extends JFrame {
 						.addGroup(
 								jPanel2Layout
 										.createSequentialGroup()
-										.addGap(25, 25, 25)
-										.addComponent(ifCheckBox)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(singleCheckBox)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(errorCheckBox)
-										.addGap(18, 18, 18)
-										.addComponent(
-												analyzeButton,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												38,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												saveButton,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												37,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE))
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
-								jPanel2Layout
-										.createSequentialGroup()
 										.addGroup(
 												jPanel2Layout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
+																javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(
+																jPanel2Layout
+																		.createSequentialGroup()
+																		.addGroup(
+																				jPanel2Layout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.LEADING)
+																						.addGroup(
+																								jPanel2Layout
+																										.createSequentialGroup()
+																										.addGap(25,
+																												25,
+																												25)
+																										.addComponent(
+																												ifCheckBox))
+																						.addGroup(
+																								jPanel2Layout
+																										.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.BASELINE)
+																										.addComponent(
+																												deleteRowButton)
+																										.addComponent(
+																												addRowButton)))
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				singleCheckBox)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				errorCheckBox)
+																		.addGap(18,
+																				18,
+																				18)
+																		.addComponent(
+																				analyzeButton,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				38,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addComponent(
+																				saveButton,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				37,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addGap(0,
+																				0,
+																				Short.MAX_VALUE))
 														.addComponent(
 																tcListContainer,
+																javax.swing.GroupLayout.Alignment.TRAILING,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
 														.addComponent(
 																tcSpecificContainer,
+																javax.swing.GroupLayout.Alignment.TRAILING,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE))
@@ -409,6 +478,31 @@ public class Main extends JFrame {
 										Short.MAX_VALUE)));
 
 		pack();
+
+		addRowButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("A");
+				// TODO Auto-generated method stub
+				Object[] rowData = { null, null, null, null, null, null, null,
+						null };
+				DefaultTableModel td = (DefaultTableModel) table.getModel();
+				td.addRow(rowData);
+
+			}
+
+		});
+
+		deleteRowButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				DefaultTableModel td = (DefaultTableModel) table.getModel();
+				td.removeRow(table.getSelectedRow());
+			}
+
+		});
 
 	}
 }

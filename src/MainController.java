@@ -8,7 +8,7 @@ public class MainController {
 	FeedbackController fbController = new FeedbackController();
 	TextFileController tfController = new TextFileController();
 	ArrayList<TestCase> tcListContainer;	 
-//	Feedback[] feedContainer = new Feedback[size];
+	ArrayList<Feedback> feedbackContainer = new ArrayList<Feedback>();
 	private int index1;
 	private int index2;
 	
@@ -29,15 +29,34 @@ public class MainController {
 	}
 	
 	public void analyzeCall(){
-		this.fbController.getFeedback(tableObj);
+		this.feedbackContainer.clear();
+		this.feedbackContainer.add(this.fbController.getFeedback(tableObj));
+		
+		if(this.fbController.isSuccessful(tableObj)==true){
+			this.tcController.makeTc();
+			this.tcListContainer = this.tcController.getTestCaseList();
+		}
+		
+		this.feedbackContainer.add(this.fbController.getFeedback(this.tcListContainer));
 	}
 	
 	public void displayFeedback(){
-		
+		for(int i=0; i<this.feedbackContainer.size(); i++){
+			System.out.println(this.feedbackContainer.get(i).getMessage());	
+		}
 	}
 	
 	public void displayTcList(){
-		
+		this.tcListContainer = this.tcController.getTestCaseList();
+		for(int i=0; i<this.tcListContainer.size(); i++){
+			for(int j=0; j<this.tcListContainer.get(i).getSingTcList().size(); j++){
+				System.out.print(this.tcListContainer.get(i).getSingTcList().get(j).getReNum());
+				if(j<this.tcListContainer.get(i).getSingTcList().size()-1){
+					System.out.print(",");
+				}
+			}
+			System.out.println();
+		}
 	}
 	
 	public void saveCall(){
@@ -45,10 +64,21 @@ public class MainController {
 	}
 	
 	public void displayDesc(){
-		
+		this.tcListContainer = this.tcController.getTestCaseList();
+		for(int i=0; i<this.tcListContainer.size(); i++){
+			for(int j=0; j<this.tcListContainer.get(i).getSingTcList().size(); j++){
+				System.out.print(this.tcListContainer.get(i).getSingTcList().get(j).getDesc());
+				if(j<this.tcListContainer.get(i).getSingTcList().size()-1){
+					System.out.print(",");
+				}
+			}
+			System.out.println();
+		}
 	}
 	
 	public void feedbackCall(){
-		
+		this.feedbackContainer.add(this.fbController.getFeedback(tableObj));
+		this.feedbackContainer.add(this.fbController.getFeedback(tcListContainer));
+		this.displayFeedback();
 	}
 }

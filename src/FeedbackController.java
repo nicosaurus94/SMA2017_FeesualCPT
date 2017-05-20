@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class FeedbackController {
 	private Feedback[] feedbackList = new Feedback[10]; 
@@ -15,16 +16,24 @@ public class FeedbackController {
 	}
 	
 	public Feedback getFeedback(Table table){
-		this.findFeedback();
-		return feedbackList[0];
+		return feedbackList[3];
+	}
+	
+	public Feedback getFeedback(ArrayList<TestCase> TcList){
+		return feedbackList[8];
 	}
 	
 	public void findFeedback(){
 		
 	}
 	
-	public boolean isSuccessful(){
-		boolean t = true;
-		return t;
+	public boolean isSuccessful(Table table){
+		boolean successful;
+		if(this.getFeedback(table) == feedbackList[0]){
+			successful = false;
+		}
+		else
+			successful = true;
+		return successful;
 	}
 }

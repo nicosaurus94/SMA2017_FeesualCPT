@@ -22,7 +22,7 @@ public class TestCase {
 		return singleTcList;
 	}
 	
-	public void add(int ref, String desc){
+	public void add(String ref, String desc){
 		SingleTestCase singleTc = new SingleTestCase(ref, desc);
 		this.singleTcList.add(singleTc);
 	}
