@@ -1,24 +1,24 @@
 import java.util.ArrayList;
 
 public class TestCaseController {
-   private ArrayList<TestCase> tcList = new ArrayList<TestCase>();
-   
+   private ArrayList<TestCase> tcList = new ArrayList<TestCase>();   
    private ArrayList<SingleTestCase> allDetail = new ArrayList<SingleTestCase>();
    private ArrayList<TestCase> allSub = new ArrayList<TestCase>();
    private ArrayList<TestCase> propertySub = new ArrayList<TestCase>();
    private ArrayList<TestCase> nonPropertySub = new ArrayList<TestCase>();
-   
    private ArrayList<TestCase> propertyTc = new ArrayList<TestCase>();
    private ArrayList<TestCase> nonPropertyTc = new ArrayList<TestCase>();
    
-   
-   
    TestCaseController(){
-      
    }
    
    public void analyzeTestCase(Table tableObj){
-      
+      for(int i=0; i<tableObj.getRow(); i++){
+    	  SingleTestCase stc = new SingleTestCase(tableObj.getTable()[i][0],tableObj.getTable()[i][1]);
+    	  stc.setSubCategory(tableObj.getTable()[i][3]);
+    	  
+    	  allDetail.add(stc);
+      }
    }
    
    public void recursive1(TestCase data, int number, int count){

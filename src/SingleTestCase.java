@@ -4,16 +4,31 @@ public class SingleTestCase {
    private String subCategory;
    private String iF;
    private String property;
-   private int single;
-   private int error;
+   private int single = 0;
+   private int error = 0;
    
    SingleTestCase(){
-      
    }
    
    SingleTestCase(String ref, String desc){
       this.reNum = ref;
       this.desc = desc;      
+   }
+   
+   public void setIF(String IF){
+	   this.iF = IF;
+   }
+   
+   public void setProperty(String prop){
+	   this.property = prop;
+   }
+   
+   public void setSingle(){
+	   this.
+   }
+   
+   public void setError(){
+	   
    }
    
    public String getReNum(){
