@@ -5,7 +5,7 @@ public class Table {
 	private int row;
 	private boolean[] Constraints = new boolean[3];
 	Table(){
-		this.row = 10;
+		this.row = 1;
 		this.table = new String[row][8];
 		this.Constraints[0] = false;
 		this.Constraints[1] = false;
@@ -18,7 +18,21 @@ public class Table {
 		}
 		else{
 			this.addRow(y);
+			System.out.println(input);
 			table[y][x] = input;
+		}
+	}
+	
+	public void addRow(int y){
+		if(row == y+1){
+			this.row++;
+			String[][] newTable = new String[row][8];
+			for(int i=0; i<row-1; i++){
+				for(int j=0; j<8; j++){
+					newTable[i][j] = this.table[i][j];
+				}
+			}
+			this.table = newTable;
 		}
 	}
 	
@@ -28,19 +42,6 @@ public class Table {
 		}
 		else if(this.Constraints[index-1]==false){
 			this.Constraints[index-1] = true;
-		}
-	}
-	
-	public void addRow(int y){
-		if(row == y){
-			this.row++;
-			String[][] newTable = new String[row][8];
-			for(int i=0; i<row; i++){
-				for(int j=0; j<8; j++){
-					newTable[i][j] = this.table[i][j];
-				}
-			}
-			this.table = newTable;
 		}
 	}
 	

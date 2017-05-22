@@ -46,7 +46,6 @@ public class Main extends JFrame {
 		});
 
 		mc = new MainController();
-		mc.tcController.analyzeTestCase(mc.tableObj);
 		mc.displayTcList();
 		mc.feedbackCall();
 		System.out.println("end");
@@ -379,8 +378,7 @@ public class Main extends JFrame {
 	public static void getJTableData() {
 		int rowCnt = table.getRowCount();
 		int columnCnt = table.getColumnCount();
-		String[][] data = new String[rowCnt][columnCnt];
-
+		
 		for (int i = 0; i < rowCnt; i++) {
 			for (int j = 0; j < columnCnt; j++) {
 				if(table.getValueAt(i, j)!=null){

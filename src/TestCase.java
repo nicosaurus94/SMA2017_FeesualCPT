@@ -2,18 +2,23 @@ import java.util.ArrayList;
 
 public class TestCase {
 	private ArrayList<SingleTestCase> singleTcList = new ArrayList<SingleTestCase>();
-	public int pos;
+	public int pos = 0;
 	TestCase(){	
 	}
 	
 	public void nextPos(){
-		if(pos < this.singleTcList.size()-1){
+		if (pos > this.singleTcList.size() - 1) {
+			pos = 0;
+		}
+		else{
 			pos++;
 		}
 	}
 	
 	public void prevPos(){
-		if(pos>0){
+		if (pos < 0) {
+			pos = this.singleTcList.size()-1;
+		} else {
 			pos--;
 		}
 	}
@@ -27,8 +32,7 @@ public class TestCase {
 		this.singleTcList.add(singleTc);
 	}
 	
-	public SingleTestCase getAt(int idx){
-		this.pos = 0;
-		return singleTcList.get(idx);
+	public String getAt(){
+		return singleTcList.get(this.pos).getDesc();
 	}
 }

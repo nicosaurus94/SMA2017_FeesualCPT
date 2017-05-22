@@ -17,27 +17,22 @@ public class MainController {
 		return tcListContainer.get(index);
 	}
 
-	public void getPrevDesc() {
-		int listSize = this.tcListContainer.get(index1).getSingTcList().size();
-		if (index2 < 0) {
-			index2 = listSize - 1;
-		} else {
-			index2--;
-		}
-		this.displayDesc(0);
+	public void getPrevDesc(int index) {
+		this.tcListContainer.get(index).prevPos();
+		this.displayDesc();
 	}
 
-	public void getNextDesc() {
-		int listSize = this.tcListContainer.get(index1).getSingTcList().size();
-		if (index2 > listSize - 1) {
-			index2 = 0;
-		}
-		else{
-			index2++;
-		}
-		this.displayDesc(0);
+	public void getNextDesc(int index) {
+		this.tcListContainer.get(index).nextPos();
+		this.displayDesc();
 	}
 
+
+	public void displayDesc() {
+		this.tcListContainer = this.tcController.getTestCaseList();
+		System.out.println(this.tcListContainer.get(index1).getAt());
+	}
+	
 	public void setInput(String input, int y, int x) { // 매개변수 필요함.
 		tableObj.setTable(input, y, x);
 	}
@@ -78,14 +73,6 @@ public class MainController {
 
 	public void saveCall() {
 		tfController.saveRequest(this.tableObj, this.tcListContainer);
-	}
-
-	public void displayDesc(int list) {
-		if (list == 1) {	//if you select tcList
-			index2 = 0;
-		}
-		this.tcListContainer = this.tcController.getTestCaseList();
-		System.out.println(this.tcListContainer.get(index1).getAt(index2).getDesc());
 	}
 
 	public void feedbackCall() {
