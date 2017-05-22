@@ -13,10 +13,6 @@ public class MainController {
 	private int index1;
 	private int index2;
 
-	public TestCase getTcList(int index) {
-		return tcListContainer.get(index);
-	}
-
 	public void getPrevDesc(int index) {
 		this.tcListContainer.get(index).prevPos();
 		this.displayDesc();
@@ -26,7 +22,6 @@ public class MainController {
 		this.tcListContainer.get(index).nextPos();
 		this.displayDesc();
 	}
-
 
 	public void displayDesc() {
 		this.tcListContainer = this.tcController.getTestCaseList();
@@ -38,7 +33,7 @@ public class MainController {
 	}
 
 	public void analyzeCall() {
-		this.feedbackContainer.clear();
+/*	this.feedbackContainer.clear();
 		this.feedbackContainer.add(this.fbController.getFeedback(tableObj));
 
 		if (this.fbController.isSuccessful(tableObj) == true) {
@@ -47,6 +42,9 @@ public class MainController {
 		}
 
 		this.feedbackContainer.add(this.fbController.getFeedback(this.tcListContainer));
+*/
+		this.tcController.makeTc();
+		this.tcListContainer = this.tcController.getTestCaseList();
 	}
 
 	public String displayFeedback() {

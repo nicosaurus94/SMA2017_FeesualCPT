@@ -46,9 +46,6 @@ public class Main extends JFrame {
 		});
 
 		mc = new MainController();
-		mc.displayTcList();
-		mc.feedbackCall();
-		System.out.println("end");
 
 	}
 
@@ -90,8 +87,8 @@ public class Main extends JFrame {
 				{ null, null, null, null, null, null, null, null }, { null, null, null, null, null, null, null, null },
 				{ null, null, null, null, null, null, null, null },
 				{ null, null, null, null, null, null, null, null } },
-				new String[] { "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7",
-						"Title 8" }));
+				new String[] { "Ref #", "Category", "Sub-Category", "Sub-Category Detail", "If", "Property", "Single",
+				"Error" }));
 		table.setName("table"); // NOI18N
 		jScrollPane1.setViewportView(table);
 
@@ -351,7 +348,7 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				getJTableData();
-				//mc.analyzeCall();
+				mc.analyzeCall();
 			}
 			
 		});
