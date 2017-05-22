@@ -24,8 +24,6 @@ public class TextFileController {
 					else{
 						fw.write('\t');
 						fw.flush();
-						fw.write('\t');
-						fw.flush();
 					}
 				}
 				fw.write('\n');

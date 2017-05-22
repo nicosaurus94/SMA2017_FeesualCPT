@@ -1,82 +1,94 @@
 import java.util.ArrayList;
 
 public class MainController {
-	MainController(){
+	MainController() {
 	}
+
 	Table tableObj = new Table();
 	TestCaseController tcController = new TestCaseController();
 	FeedbackController fbController = new FeedbackController();
 	TextFileController tfController = new TextFileController();
-	ArrayList<TestCase> tcListContainer;	 
+	ArrayList<TestCase> tcListContainer;
 	ArrayList<Feedback> feedbackContainer = new ArrayList<Feedback>();
 	private int index1;
 	private int index2;
-	
-	public TestCase getTcList(int index){ 
+
+	public TestCase getTcList(int index) {
 		return tcListContainer.get(index);
 	}
 
-	public void getPrevDesc(){
-		
+	public void getPrevDesc() {
+		int listSize = this.tcListContainer.get(index1).getSingTcList().size();
+		if (index2 < 0) {
+			index2 = listSize - 1;
+		} else {
+			index2--;
+		}
+		this.displayDesc(0);
 	}
-	
-	public void getNextDesc(){
-		
+
+	public void getNextDesc() {
+		int listSize = this.tcListContainer.get(index1).getSingTcList().size();
+		if (index2 > listSize - 1) {
+			index2 = 0;
+		}
+		else{
+			index2++;
+		}
+		this.displayDesc(0);
 	}
-	
-	public void setInput(String input, int y, int x){	//매개변수 필요함.
+
+	public void setInput(String input, int y, int x) { // 매개변수 필요함.
 		tableObj.setTable(input, y, x);
 	}
-	
-	public void analyzeCall(){
+
+	public void analyzeCall() {
 		this.feedbackContainer.clear();
 		this.feedbackContainer.add(this.fbController.getFeedback(tableObj));
-		
-		if(this.fbController.isSuccessful(tableObj)==true){
+
+		if (this.fbController.isSuccessful(tableObj) == true) {
 			this.tcController.makeTc();
 			this.tcListContainer = this.tcController.getTestCaseList();
 		}
-		
+
 		this.feedbackContainer.add(this.fbController.getFeedback(this.tcListContainer));
 	}
-	
-	public void displayFeedback(){
-		for(int i=0; i<this.feedbackContainer.size(); i++){
-			System.out.println(this.feedbackContainer.get(i).getMessage());	
+
+	public String displayFeedback() {
+		String feedbackMsg = "";
+		for (int i = 0; i < this.feedbackContainer.size(); i++) {
+			System.out.println(this.feedbackContainer.get(i).getMessage());
+			feedbackMsg += this.feedbackContainer.get(i).getMessage();
 		}
+		return feedbackMsg;
 	}
-	
-	public void displayTcList(){
+
+	public void displayTcList() {
 		this.tcListContainer = this.tcController.getTestCaseList();
-		for(int i=0; i<this.tcListContainer.size(); i++){
-			for(int j=0; j<this.tcListContainer.get(i).getSingTcList().size(); j++){
+		for (int i = 0; i < this.tcListContainer.size(); i++) {
+			for (int j = 0; j < this.tcListContainer.get(i).getSingTcList().size(); j++) {
 				System.out.print(this.tcListContainer.get(i).getSingTcList().get(j).getReNum());
-				if(j<this.tcListContainer.get(i).getSingTcList().size()-1){
+				if (j < this.tcListContainer.get(i).getSingTcList().size() - 1) {
 					System.out.print(",");
 				}
 			}
 			System.out.println();
 		}
 	}
-	
-	public void saveCall(){
+
+	public void saveCall() {
 		tfController.saveRequest(this.tableObj, this.tcListContainer);
 	}
-	
-	public void displayDesc(){
-		this.tcListContainer = this.tcController.getTestCaseList();
-		for(int i=0; i<this.tcListContainer.size(); i++){
-			for(int j=0; j<this.tcListContainer.get(i).getSingTcList().size(); j++){
-				System.out.print(this.tcListContainer.get(i).getSingTcList().get(j).getDesc());
-				if(j<this.tcListContainer.get(i).getSingTcList().size()-1){
-					System.out.print(",");
-				}
-			}
-			System.out.println();
+
+	public void displayDesc(int list) {
+		if (list == 1) {	//if you select tcList
+			index2 = 0;
 		}
+		this.tcListContainer = this.tcController.getTestCaseList();
+		System.out.println(this.tcListContainer.get(index1).getAt(index2).getDesc());
 	}
-	
-	public void feedbackCall(){
+
+	public void feedbackCall() {
 		this.feedbackContainer.add(this.fbController.getFeedback(tableObj));
 		this.feedbackContainer.add(this.fbController.getFeedback(tcListContainer));
 		this.displayFeedback();

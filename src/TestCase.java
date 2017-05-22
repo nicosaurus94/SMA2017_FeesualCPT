@@ -22,8 +22,8 @@ public class TestCase {
 		return singleTcList;
 	}
 	
-	public void add(String ref, String desc){
-		SingleTestCase singleTc = new SingleTestCase(ref, desc);
+	public void add(String ref, String desc, String sub){
+		SingleTestCase singleTc = new SingleTestCase(ref, desc, sub);
 		this.singleTcList.add(singleTc);
 	}
 	

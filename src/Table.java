@@ -1,7 +1,6 @@
 import javax.swing.JTable;
 
 public class Table {
-	private JTable jtable;
 	private String[][] table;
 	private int row;
 	private boolean[] Constraints = new boolean[3];
