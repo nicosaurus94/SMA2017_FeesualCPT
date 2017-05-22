@@ -76,8 +76,6 @@ public class MainController {
 	}
 
 	public void feedbackCall() {
-		this.feedbackContainer.add(this.fbController.getFeedback(tableObj));
-		this.feedbackContainer.add(this.fbController.getFeedback(tcListContainer));
 		this.displayFeedback();
 	}
 }
